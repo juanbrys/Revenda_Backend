@@ -2,8 +2,8 @@ import { DataTypes } from 'sequelize';
 import { sequelize } from '../databases/conecta.js';
 import { Carro } from './carros.js';
 
-export const Proposta = sequelize.define(
-  'proposta',
+export const Proposal = sequelize.define(
+  'proposal',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -24,12 +24,12 @@ export const Proposta = sequelize.define(
     },
   },
   {
-    tableName: 'Propostas',
+    tableName: 'Proposals',
     timestamps: false,
   },
 ); 
 
-Proposta.belongsTo(Carro, {
+Proposal.belongsTo(Carro, {
   foreignKey: {
     name: 'carro_id',
     allowNull: false,
@@ -38,7 +38,7 @@ Proposta.belongsTo(Carro, {
   onUpdate: 'CASCADE',
 });
 
-Carro.hasMany(Proposta, {
+Carro.hasMany(Proposal, {
   foreignKey: {
     name: 'carro_id',
   },

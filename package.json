@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "npx nodemon app"
+  },
   "type": "module",
   "dependencies": {
     "bcrypt": "^5.1.1",

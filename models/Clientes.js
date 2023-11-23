@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../databases/conecta.js';
 
-export const Client = sequelize.define(
-  'client',
+export const Cliente = sequelize.define(
+  'cliente',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -23,7 +23,7 @@ export const Client = sequelize.define(
     },
   },
   {
-    tableName: 'Clients',
+    tableName: 'Clientes',
     timestamps: false
   }
 );

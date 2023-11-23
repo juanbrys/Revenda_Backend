@@ -1,9 +1,10 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../databases/conecta.js';
-import { Carro } from './carros.js';
+import { Carro } from './Carros.js';
+import { Cliente } from './Clientes.js';
 
-export const Proposal = sequelize.define(
-  'proposal',
+export const Proposta = sequelize.define(
+  'proposta',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -24,12 +25,12 @@ export const Proposal = sequelize.define(
     },
   },
   {
-    tableName: 'Proposals',
+    tableName: 'Propostas',
     timestamps: false,
   },
 ); 
 
-Proposal.belongsTo(Carro, {
+Proposta.belongsTo(Carro, {
   foreignKey: {
     name: 'carro_id',
     allowNull: false,
@@ -38,17 +39,29 @@ Proposal.belongsTo(Carro, {
   onUpdate: 'CASCADE',
 });
 
-Carro.hasMany(Proposal, {
+Carro.hasMany(Proposta, {
   foreignKey: {
     name: 'carro_id',
   },
 });
 
+Proposta.belongsTo(Cliente, {
+  foreignKey: {
+    name: 'cliente_id',
+    allowNull: false,
+  },
+  onDelete: 'RESTRICT',
+  onUpdate: 'CASCADE',
+});
+
+Cliente.hasMany(Proposta, {
+  foreignKey: {
+    name: 'cliente_id',
+  },
+});
 
 
-// {
-//   "nome": "Ana Maria",
-//   "foto": "http://www.ensp.fiocruz.br/portal-ensp/_imagens/meu-cadastro/b23d9798162c07d06404e91542812e9.jpg",
-//   "clienteId": 1,
-//   "carroId": 22,
-// },
+
+
+
+

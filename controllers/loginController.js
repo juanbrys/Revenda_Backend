@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-import { Clientes } from '../models/Clientes'
+import { Cliente } from '../models/Clientes.js'
 
 
 export const loginUsuario = async (req, res) => {
@@ -20,7 +20,7 @@ export const loginUsuario = async (req, res) => {
 
   // verifica se o e-mail está cadastrado
   try {
-    const cliente = await Usuario.findOne({ where: { email } })
+    const cliente = await Cliente.findOne({ where: { email } })
 
     if (cliente == null) {
       // res.status(400).json({ erro: "Erro... E-mail inválido" })

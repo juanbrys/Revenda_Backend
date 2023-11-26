@@ -16,7 +16,7 @@ export const Proposta = sequelize.define(
       allowNull: false,
     },
     data: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     texto: {

@@ -47,6 +47,30 @@ export const carroCreate = async (req, res) => {
   }
 };
 
+export const carroFindById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const carro = await Carro.findByPk(id, {
+      include: [
+        {
+          model: Ano,
+          attributes: ['id', 'ano'],
+        },
+      ],
+    });
+
+    if (!carro) {
+      return res.status(404).json({ error: 'CarroID not found' });
+    }
+
+    res.status(200).json(carro);
+  } catch (error) {
+    console.error(`Erro ao buscar o carro ${new Date()}: ${error}`);
+    res.status(400).json({ error: error.message });
+  }
+}
+
 export const carroUpdate = async (req, res) => {
   const { id } = req.params;
   const procuraCarro = await Carro.findByPk(id);

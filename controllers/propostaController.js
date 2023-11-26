@@ -22,6 +22,31 @@ export const propostaIndex = async (req, res) => {
   }
 }
 
+export const propostaFindByCarroId = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const proposta = await Proposta.findAll({
+      where: {
+        id
+      },
+      include: [
+        {
+          model: Carro,
+          attributes: ['id'],
+        },
+        {
+          model: Cliente,
+          attributes: ['id'],
+        }
+      ],
+    });
+    res.status(200).json(proposta)
+  } catch (error) {
+    res.status(400).send(error)
+  }
+}
+
 export const propostaCreate = async (req, res) => {
   const { lance, data, texto, carro_id, cliente_id } = req.body;
 

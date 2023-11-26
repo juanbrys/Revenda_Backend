@@ -13,7 +13,7 @@ export const Carro = sequelize.define('carro', {
     allowNull: false
   }, 
   imagem: {
-    type: DataTypes.STRING(60),
+    type: DataTypes.STRING,
     allowNull: false
   },
   quilometragem: {
@@ -25,12 +25,12 @@ export const Carro = sequelize.define('carro', {
     allowNull: false
   },
   sobre: {
-    type: DataTypes.STRING(60),
+    type: DataTypes.STRING,
     allowNull: false
   },
   destaque: {
     type: DataTypes.BOOLEAN,
-    allowNull: false
+    allowNull: true
   },
 },
 { 

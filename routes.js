@@ -3,6 +3,7 @@ import { loginUsuario } from './controllers/loginController.js'
 import { usuarioCreate, usuarioIndex } from './controllers/clienteController.js'
 import { carroCreate, carroDestroy, carroIndex, carroUpdate } from "./controllers/carroController.js"
 import { propostaCreate, propostaDestroy, propostaIndex, propostaUpdate } from "./controllers/propostaController.js"
+import { anoIndex } from "./controllers/anoController.js"
 
 const router = Router()
 
@@ -18,6 +19,7 @@ const router = Router()
 
 router.get('/login', loginUsuario)
       .get('/listar', usuarioIndex)
+      .get('/anos', anoIndex)
       .get('/carros', carroIndex)
       .post('/carros', carroCreate)
       .put('/carros/:id', carroUpdate)

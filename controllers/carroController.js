@@ -40,7 +40,7 @@ export const carroCreate = async (req, res) => {
       ano_id
     });
 
-    res.status(200).json({ msg: 'Carro criado com sucesso', carro });
+    res.status(201).json({ msg: 'Carro criado com sucesso', carro });
   } catch (error) {
     console.error(`erro ao adicionar o carro ${new Date()}: ${error}`);
     res.status(400).json({ error: error.message });

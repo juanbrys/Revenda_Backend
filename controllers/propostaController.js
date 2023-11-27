@@ -28,7 +28,7 @@ export const propostaFindByCarroId = async (req, res) => {
   try {
     const proposta = await Proposta.findAll({
       where: {
-        id
+        carro_id: id
       },
       include: [
         {

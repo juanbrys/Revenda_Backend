@@ -71,6 +71,58 @@ export const carroFindById = async (req, res) => {
   }
 }
 
+export const carroFindByDestaque = async (req, res) => {
+  try {
+    const carro = await Carro.findAll({
+      where: {
+        destaque: true
+      },
+      include: [
+        {
+          model: Ano,
+          attributes: ['id', 'ano'],
+        },
+      ],
+    });
+
+    if (!carro) {
+      return res.status(404).json({ error: 'Destaque not found' });
+    }
+
+    res.status(200).json(carro);
+  } catch (error) {
+    console.error(`Erro ao buscar o destaque ${new Date()}: ${error}`);
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const carroFindByMarca = async (req, res) => {
+  const { marca } = req.params;
+
+  try {
+    const carro = await Carro.findAll({
+      where: {
+        marca: marca
+      },
+      include: [
+        {
+          model: Ano,
+          attributes: ['id', 'ano'],
+        },
+      ],
+    });
+
+    if (!carro) {
+      return res.status(404).json({ error: 'Marca not found' });
+    }
+
+    res.status(200).json(carro);
+  } catch (error) {
+    console.error(`Erro ao buscar a marca ${new Date()}: ${error}`);
+    res.status(400).json({ error: error.message });
+  }
+}
+
 export const carroUpdate = async (req, res) => {
   const { id } = req.params;
   const procuraCarro = await Carro.findByPk(id);

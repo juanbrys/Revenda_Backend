@@ -37,7 +37,7 @@ export const propostaFindByCarroId = async (req, res) => {
         },
         {
           model: Cliente,
-          attributes: ['id'],
+          attributes: ['id', 'nome'],
         }
       ],
     });

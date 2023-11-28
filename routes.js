@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { loginUsuario } from './controllers/loginController.js'
 import { usuarioCreate, usuarioIndex } from './controllers/clienteController.js'
-import { carroCreate, carroDestroy, carroFindById, carroIndex, carroUpdate } from "./controllers/carroController.js"
+import { carroCreate, carroDestroy, carroFindByDestaque, carroFindById, carroFindByMarca, carroIndex, carroUpdate } from "./controllers/carroController.js"
 import { propostaCreate, propostaDestroy, propostaFindByCarroId, propostaIndex, propostaUpdate } from "./controllers/propostaController.js"
 import { anoIndex } from "./controllers/anoController.js"
 
@@ -22,6 +22,8 @@ router.get('/login', loginUsuario)
       .get('/anos', anoIndex)
       .get('/carros', carroIndex)
       .get('/carro/:id', carroFindById)
+      .get('/carros/destaques', carroFindByDestaque)
+      .get('/carros/marcas/:marca', carroFindByMarca)
       .post('/carros', carroCreate)
       .put('/carros/:id', carroUpdate)
       .delete('/carros/:id', carroDestroy)

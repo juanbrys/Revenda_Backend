@@ -33,7 +33,7 @@ export const propostaFindByCarroId = async (req, res) => {
       include: [
         {
           model: Carro,
-          attributes: ['id'],
+          attributes: ['id', 'marca', 'preco'],
         },
         {
           model: Cliente,

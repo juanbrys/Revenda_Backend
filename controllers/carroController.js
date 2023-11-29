@@ -1,5 +1,6 @@
 import { Carro } from '../models/Carros.js';
 import { Ano } from '../models/Anos.js';
+import { Op } from 'sequelize';
 
 export const carroIndex = async (req, res) => {
   try {
@@ -71,6 +72,30 @@ export const carroFindById = async (req, res) => {
   }
 }
 
+export const carroOrderByPreco = async (req, res) => {
+  try {
+    const carros = await Carro.findAll({
+      order: [['preco', 'DESC']],
+      include: [
+        {
+          model: Ano,
+          attributes: ['id', 'ano'],
+        },
+      ],
+    });
+
+    if (!carros || carros.length === 0) {
+      return res.status(404).json({ error: 'Carros not found' });
+    }
+
+    res.status(200).json(carros);
+  } catch (error) {
+    console.error(`Erro ao buscar os carros ${new Date()}: ${error}`);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
 export const carroFindByDestaque = async (req, res) => {
   try {
     const carro = await Carro.findAll({
@@ -102,7 +127,9 @@ export const carroFindByMarca = async (req, res) => {
   try {
     const carro = await Carro.findAll({
       where: {
-        marca: marca
+        marca: {
+          [Op.like]: `%${marca}%`
+        }
       },
       include: [
         {
@@ -142,6 +169,34 @@ export const carroUpdate = async (req, res) => {
         destaque,
         sobre,
         ano_id
+      },
+      {
+        where: {
+          id,
+        },
+      },
+    );
+
+    res.status(200).json({ msg: 'Carro atualizado com sucesso', carro });
+  } catch (error) {
+    console.error(`Erro ao atualizar o carro ${new Date()}: ${error}`);
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const carroUpdateDestaque = async (req, res) => {
+  const { id } = req.params;
+  const procuraCarro = await Carro.findByPk(id);
+  const { destaque } = req.body;
+
+  try {
+    if (!procuraCarro) {
+      return res.status(404).json({ error: 'CarroID not found' });
+    }
+
+    const carro = await Carro.update(
+      {
+        destaque,
       },
       {
         where: {

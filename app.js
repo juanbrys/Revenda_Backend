@@ -17,10 +17,10 @@ app.use(routes);
 async function conecta_db() {
   try {
     await sequelize.authenticate();
-    await Ano.sync({ alter: true })
-    await Carro.sync({ alter: true })
-    await Cliente.sync({ alter: true })
-    await Proposta.sync({ alter: true })
+    await Ano.sync({})
+    await Carro.sync({})
+    await Cliente.sync({})
+    await Proposta.sync({})
    
 
     console.log('A conexão foi estabelecida com sucesso.');
